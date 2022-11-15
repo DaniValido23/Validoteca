@@ -1,0 +1,46 @@
+{% extends 'core/base.html' %}
+{% block content %}
+{% include 'store/includes/menu_store.html' %}
+    
+    <!-- Page Content-->
+    <section class="py-5">
+        <div class="container px-5 my-5">
+            <div class="row gx-5 justify-content-center">
+                <div class="col-lg-6">
+                    <div class="text-center mb-5">
+                        <h1 class="fw-bolder"> {{store.title}} </h1>
+                        <p class="lead fw-normal text-muted mb-0">{{store.description|safe|truncatechars:"250"}}</p>
+                        <a class="text-decoration-none btn btn-success mb-4" target="_blank" href="{{ store.book.url }}">
+                            Ver libro
+                            <i class="bi-arrow-right"></i>
+                        </a>
+                        {% if request.user.is_staff %}
+                        <p>
+                            <a class="btn btn-warning" href="{% url 'libros:update' store.id %}" role="button"><i class="bi bi-pencil-square"></i> Editar Libro</a>
+                            <a class="btn btn-danger" href="{% url 'libros:delete' store.id %}" role="button"><i class="bi bi-trash"></i> Eliminar Libro</a>
+                        </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="row gx-5">
+                <!-- https://dummyimage.com/1300x700/343a40/6c757d -->
+                <div class="col-12"><img class="img-fluid rounded-3 mb-5" src="https://picsum.photos/id/367/1300/700" alt="..." /></div>
+                <!-- <div class="col-lg-6"><img class="img-fluid rounded-3 mb-5" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." /></div>
+                <div class="col-lg-6"><img class="img-fluid rounded-3 mb-5" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." /></div> -->
+            </div>
+            <div class="row gx-5 justify-content-center">
+                <div class="col-lg-9">
+                    <h3 class="fw-bolder text-center">Descripción: </h3>
+                    <div class="mb-5">
+                        <p class="lead fw-normal text-muted">{{store.description|safe}}</p>
+                        <a class="text-decoration-none" target="_blank" href="{{ store.book.url }}">
+                            Ver libro
+                            <i class="bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
